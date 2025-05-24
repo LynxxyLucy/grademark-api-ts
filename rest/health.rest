@@ -1,7 +1,6 @@
 ### VARIABLES
 
-@SupabasePostgresApiKey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxeGlnanp0ZHdvZ3lkdGdmdnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwOTQ4OTUsImV4cCI6MjA2MzY3MDg5NX0.rXakwm51nasb5p8RmhKQxc5XdsoX01F_2Njy7NU1afU
-
+@SupabasePostgresApiKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxeGlnanp0ZHdvZ3lkdGdmdnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwOTQ4OTUsImV4cCI6MjA2MzY3MDg5NX0.rXakwm51nasb5p8RmhKQxc5XdsoX01F_2Njy7NU1afU
 
 ### Local Health Check
 
@@ -9,5 +8,5 @@ GET http://localhost:3000/health
 
 ### PostgreSQL Instance Health Check
 
-GET https://fqxigjztdwogydtgfvvs.supabase.co/health
+GET https://fqxigjztdwogydtgfvvs.supabase.co/health 
 apikey: {{SupabasePostgresApiKey}}
