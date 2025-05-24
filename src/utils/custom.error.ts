@@ -17,7 +17,7 @@ export class NotFoundError extends Error {
 export class InvalidError extends Error {
   constructor(message = "Invalid!") {
     super(message);
-    this.name = "NotFoundError";
+    this.name = "InvalidError";
     Error.captureStackTrace(this, this.constructor);
   }
 }

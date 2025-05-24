@@ -40,8 +40,10 @@ router.post("/register", async (req: Request, res: Response): Promise<any> => {
     return res.status(201).json({ message: "New user created.", newUser });
   } catch (error: any) {
     console.log(error);
-    if (error instanceof ConflictError || InvalidError) {
+    if (error instanceof ConflictError) {
       return res.status(400).json({ message: error.message });
+    } else if (error instanceof InvalidError) {
+      return res.status(400).json({ message: error.message})
     }
     return res.status(500).json({ message: error.message }); // Internal Server Error
   }
@@ -58,9 +60,9 @@ router.post("/login", async (req: Request, res: Response): Promise<any> => {
   } catch (error: any) {
     console.log(error.message);
     if (error instanceof InvalidError) {
-      return res.status(400).json({ error: error.message }); // Bad Request
+      return res.status(400).json({ message: error.message }); // Bad Request
     }
-    return res.status(500).json({ error: error.message }); // Internal Server Error
+    return res.status(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -79,7 +81,7 @@ router.delete(
       if (error instanceof NotFoundError) {
         return res.status(404).json({ message: error.message });
       }
-      return res.sendStatus(500); // Internal Server Error
+      return res.status(500).json({ message: error.message }); // Internal Server Error
     }
   }
 );
