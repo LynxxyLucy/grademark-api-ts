@@ -7,18 +7,12 @@ class AuthRepository {
     return await prisma.user.findMany();
   }
 
-  async getById(id: string): Promise<User> {
-    const user = await prisma.user.findUnique({
+  async getById(id: string): Promise<User | null> {
+    return await prisma.user.findUnique({
       where: {
         id,
       },
     });
-
-    if (!user) {
-      throw new NotFoundError();
-    }
-
-    return user;
   }
 
   async getUniqueByUsername(username: string): Promise<User | null> {
