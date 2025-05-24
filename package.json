@@ -8,6 +8,7 @@
     "start": "tsx --env-file=.env ./src/server.ts",
     "build": "tsc",
     "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:generate": "prisma generate",
     "prisma:studio": "prisma studio"
   },
   "keywords": [],
