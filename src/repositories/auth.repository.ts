@@ -1,19 +1,27 @@
 import prisma from "@prisma.client";
+import { User } from "@generated/prisma";
+import { NotFoundError } from "../utils/custom.error";
 
 class AuthRepository {
-  async getAll() {
+  async getAll(): Promise<User[]> {
     return await prisma.user.findMany();
   }
 
-  async getById(id: String) {
-    return await prisma.user.findUnique({
+  async getById(id: string): Promise<User> {
+    const user = await prisma.user.findUnique({
       where: {
         id,
       },
     });
+
+    if (!user) {
+      throw new NotFoundError();
+    }
+
+    return user;
   }
 
-  async getUniqueByUsername(username: String) {
+  async getUniqueByUsername(username: string): Promise<User | null> {
     return await prisma.user.findUnique({
       where: {
         username,
@@ -21,7 +29,7 @@ class AuthRepository {
     });
   }
 
-  async getUniqueByEmail(email: String) {
+  async getUniqueByEmail(email: string): Promise<User | null> {
     return await prisma.user.findUnique({
       where: {
         email,
@@ -29,18 +37,21 @@ class AuthRepository {
     });
   }
 
-  async getUniqueByIdentifier(identifier: String) {
-    return await prisma.user.findUnique({
-      where: identifier,
+  async getFirstByIdentifier(identifier: string): Promise<User | null> {
+    return await prisma.user.findFirst({
+      where: {
+        // Assuming identifier could be either email or username
+        OR: [{ email: identifier }, { username: identifier }],
+      },
     });
   }
 
   async create(
-    name: String,
-    email: String,
-    username: String,
-    password: String
-  ) {
+    name: string,
+    email: string,
+    username: string,
+    password: string
+  ): Promise<User> {
     return await prisma.user.create({
       data: {
         name,
@@ -51,8 +62,8 @@ class AuthRepository {
     });
   }
 
-  async delete(id: String) {
-    return await prisma.user.delete({
+  async delete(id: string) : Promise<void> {
+    await prisma.user.delete({
       where: {
         id,
       },

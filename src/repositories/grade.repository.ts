@@ -1,8 +1,7 @@
 import prisma from "@prisma.client";
-import { UUID } from "crypto";
 
 class GradeRepository {
-  async getAllForSubject(subjectId: UUID) {
+  async getAllForSubject(subjectId: string) {
     return await prisma.grade.findMany({
       where: {
         subjectId,
@@ -10,7 +9,7 @@ class GradeRepository {
     });
   }
 
-  async checkSubjectExistance(subjectId: UUID) {
+  async checkSubjectExistance(subjectId: string) {
     return await prisma.subject.findUnique({
       where: {
         id: subjectId,
@@ -18,7 +17,7 @@ class GradeRepository {
     });
   }
 
-  async create(subjectId: UUID, grade: String, type: String, date: String ) {
+  async create(subjectId: string, grade: string, type: string, date: string ) {
     return await prisma.grade.create({
       data: {
         subjectId,
@@ -29,7 +28,7 @@ class GradeRepository {
     });
   }
 
-  async update(id: UUID, grade: String, type: String, date: String) {
+  async update(id: string, grade: string, type: string, date: string) {
     return await prisma.grade.update({
       where: {
         id,
@@ -42,7 +41,7 @@ class GradeRepository {
     });
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     return await prisma.grade.delete({
       where: {
         id,

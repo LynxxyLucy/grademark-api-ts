@@ -1,9 +1,8 @@
 import prisma from "@prisma.client";
 import subjectRepo from "./subject.repository";
-import { UUID } from "crypto";
 
 class SemesterRepository {
-  async getManyBySearch(search: String, userId: UUID) {
+  async getManyBySearch(search: string, userId: string) {
     return await prisma.semester.findMany({
       where: {
         semester: { contains: search }, // Find semesters that contain the string
@@ -12,7 +11,7 @@ class SemesterRepository {
     });
   }
 
-  async getManyForUser(userId: UUID) {
+  async getManyForUser(userId: string) {
     return await prisma.semester.findMany({
       where: {
         userId,
@@ -20,7 +19,7 @@ class SemesterRepository {
     });
   }
 
-  async getUnique(id: UUID) {
+  async getUnique(id: string) {
     return await prisma.semester.findUnique({
       where: {
         id,
@@ -28,18 +27,18 @@ class SemesterRepository {
     });
   }
 
-  async getUniqueWithSubjects(id: UUID) {
+  async getUniqueWithSubjects(id: string) {
     try {
       const semester = await this.getUnique(id);
       const subjects = await subjectRepo.getAllForSemester(id);
-      semester.subjects = subjects;
-      return semester;
+      const sem = { ...semester, subjects: [...subjects] };
+      return sem;
     } catch {
       return null;
     }
   }
 
-  async create(userId: UUID, semester: String) {
+  async create(userId: string, semester: string) {
     return await prisma.semester.create({
       data: {
         semester: semester.toString(), // Convert semester to string
@@ -48,7 +47,7 @@ class SemesterRepository {
     });
   }
 
-  async update(id: UUID, userId: UUID, semester: String) {
+  async update(id: string, userId: string, semester: string) {
     return await prisma.semester.update({
       where: {
         id,
@@ -60,7 +59,7 @@ class SemesterRepository {
     });
   }
 
-  async delete(id: UUID, userId: UUID) {
+  async delete(id: string, userId: string) {
     return await prisma.semester.delete({
       where: {
         id,

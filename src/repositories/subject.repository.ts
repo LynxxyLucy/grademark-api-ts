@@ -1,9 +1,8 @@
 import prisma from "@prisma.client"
 import gradeRepo from "./grade.repository";
-import { UUID } from "crypto";
 
 class SubjectRepository {
-  async getAllForSemester(semesterId: UUID) {
+  async getAllForSemester(semesterId: string) {
     return await prisma.subject.findMany({
       where: {
         semesterId,
@@ -11,7 +10,7 @@ class SubjectRepository {
     });
   }
 
-  async getUnique(id: UUID) {
+  async getUnique(id: string) {
     return await prisma.subject.findUnique({
       where: {
         id,
@@ -19,18 +18,18 @@ class SubjectRepository {
     });
   }
 
-  async getUniqueWithGrades(id: UUID ) {
+  async getUniqueWithGrades(id: string ) {
     try {
       const subject = await this.getUnique(id);
       const grades = await gradeRepo.getAllForSubject(id);
-      subject.grades = grades;
-      return subject;
+      const subj = {...subject, grades: [...grades]}
+      return subj;
     } catch {
       return null;
     }
   }
 
-  async createNew(name: String, semesterId: UUID) {
+  async createNew(name: string, semesterId: string) {
     return await prisma.subject.create({
       data: {
         name,
@@ -39,7 +38,7 @@ class SubjectRepository {
     });
   }
 
-  async update(id: UUID, name: String) {
+  async update(id: string, name: string) {
     return await prisma.subject.update({
       where: {
         id,
@@ -50,7 +49,7 @@ class SubjectRepository {
     });
   }
 
-  async delete(id: String) {
+  async delete(id: string) {
     return await prisma.subject.delete({
       where: {
         id,
