@@ -5,9 +5,10 @@
   "scripts": {
     "test": "vitest --coverage",
     "dev": "tsx --watch --env-file=.env ./src/server.ts",
-    "migrate": "prisma migrate dev --name init",
     "start": "tsx --env-file=.env ./src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
