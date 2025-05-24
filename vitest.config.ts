@@ -5,6 +5,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    coverage: {
+      include: ['src'],
+      exclude: [],
+    },
   },
   plugins: [tsconfigPaths()], // only if you are using custom tsconfig paths
 });
