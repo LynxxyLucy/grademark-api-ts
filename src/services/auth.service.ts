@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import repo from "@repositories/auth.repository";
 import {
@@ -6,7 +6,7 @@ import {
   InvalidError,
   NotFoundError,
 } from "@utils/custom.error";
-import {User} from "@generated/index"
+import { User } from "@generated/prisma";
 
 class AuthService {
   // MARK: FIND ALL USERS
@@ -15,7 +15,12 @@ class AuthService {
   }
 
   // MARK:  REGISTER USER
-  async registerUser(name: String, email: String, username: String, password: String) {
+  async registerUser(
+    name: string,
+    email: string,
+    username: string,
+    password: string
+  ) {
     // Check if the user already exists
     const findUsername = await repo.getUniqueByUsername(username);
     const findEmail = await repo.getUniqueByEmail(email);
@@ -30,12 +35,7 @@ class AuthService {
     const hashedPassword = this.hashPass(password);
 
     // Create a new user
-    const user = await repo.create(
-      name,
-      email,
-      username,
-      hashedPassword,
-    );
+    const user = await repo.create(name, email, username, hashedPassword);
 
     // Generate a JWT token
     const token = this.generateToken(user.id);
@@ -48,11 +48,11 @@ class AuthService {
   }
 
   // MARK:  LOGIN USER
-  async loginUser(email: String, username: String, password: String) {
+  async loginUser(email: string, username: string, password: string) {
     // check if the user exists and validate login
     const identifier = email ? email : username;
 
-    const user = await repo.getUniqueByIdentifier(identifier);
+    const user = await repo.getFirstByIdentifier(identifier);
     if (!user) {
       throw new InvalidError("Invalid username or password.");
     }
@@ -77,27 +77,31 @@ class AuthService {
   }
 
   // MARK:  DELETE USER
-  async deleteUser(id) {
-    const toDelete = await repo.findById({ id });
+  async deleteUser(id: string) {
+    const toDelete = await repo.getById(id);
     if (!toDelete) {
       throw new NotFoundError("User not found!");
     }
 
-    await repo.delete({ id });
+    await repo.delete(id);
     return toDelete;
   }
 
   // MARK: - HELPERS
-  hashPass(password) {
+  hashPass(password: string) {
     return bcrypt.hashSync(password, 16);
   }
 
-  validatePass(password, user) {
+  validatePass(password: string, user: User) {
     return bcrypt.compareSync(password, user.password);
   }
 
-  generateToken(userId) {
-    return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+  generateToken(userId: string) {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) {
+      throw new Error('JWT_SECRET is not defined in environment variables');
+    }
+    return jwt.sign(userId, jwtSecret, {
       expiresIn: "24h",
     });
   }
