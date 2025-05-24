@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  username  String     @unique
+  password  String
+  createdAt DateTime   @default(now()) // UTC
+  updatedAt DateTime   @updatedAt // UTC
+  semesters Semester[]
+}
+
+model Semester {
+  id        String    @id @default(uuid())
+  semester  String    @unique
+  createdAt DateTime  @default(now()) // UTC
+  updatedAt DateTime  @updatedAt // UTC
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subjects  Subject[]
+}
+
+model Subject {
+  id         String   @id @default(uuid())
+  name       String
+  createdAt  DateTime @default(now()) // UTC
+  updatedAt  DateTime @updatedAt // UTC
+  semesterId String
+  semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+  grades     Grade[]
+}
+
+model Grade {
+  id          String   @id @default(uuid())
+  type        String // e.g. "Exam", "Assignment", "Project", etc.
+  grade       String // e.g. "A", "B", "C" or "1", "2", "3",...
+  date        String // e.g. "2023-10-01"
+  createdAt   DateTime @default(now()) // UTC
+  updatedAt   DateTime @updatedAt // UTC
+  subjectId   String
+  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+}
