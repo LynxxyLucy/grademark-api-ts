@@ -29,7 +29,7 @@ class SubjectRepository {
     }
   }
 
-  async createNew(name: string, semesterId: string) {
+  async create(name: string, semesterId: string) {
     return await prisma.subject.create({
       data: {
         name,

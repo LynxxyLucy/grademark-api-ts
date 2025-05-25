@@ -17,7 +17,7 @@ class GradeRepository {
     });
   }
 
-  async create(subjectId: string, grade: string, type: string, date: string ) {
+  async create(subjectId: string, grade: string, type: string, date: Date ) {
     return await prisma.grade.create({
       data: {
         subjectId,
