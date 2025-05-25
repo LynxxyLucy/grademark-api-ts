@@ -1,10 +1,12 @@
 ### VARIABLES
 
 @supabaseApikey = {{$dotenv SUPABASE_APIKEY}}
+@apiKey = {{$dotenv APIKEY}}
 
 ### Local Health Check
 
 GET http://localhost:3000/health
+apikey: {{apiKey}}
 
 ### PostgreSQL Instance Health Check
 

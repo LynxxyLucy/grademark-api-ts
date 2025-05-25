@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { join } from 'path';
-import authMiddleware from './middleware/auth.middleware';
+import apikey from './middleware/apikey.middleware';
+import auth from './middleware/auth.middleware';
 import authRouter from '@routes/auth.router';
 import semesterRouter from '@routes/semester.router';
 import subjectRouter from '@routes/subject.router';
@@ -21,10 +22,10 @@ health.get('/', (req: Request, res: Response) => {
 });
 
 // App Route Definitions
-app.use('/health', health);
-app.use('/auth', authMiddleware, authRouter);
-app.use('/semesters', authMiddleware, semesterRouter);
-app.use('/subjects', authMiddleware, subjectRouter);
-app.use('/grades', authMiddleware, gradeRouter);
+app.use('/health', apikey, health);
+app.use('/auth', apikey, auth, authRouter);
+app.use('/semesters', apikey, auth, semesterRouter);
+app.use('/subjects', apikey, auth, subjectRouter);
+app.use('/grades', apikey, auth, gradeRouter);
 
 export default app;

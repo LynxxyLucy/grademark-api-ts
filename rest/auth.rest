@@ -4,19 +4,21 @@
 
 @devUserId = {{$dotenv DEV_USER_ID}}
 
-@adminToken = {{$dotenv ADMIN_TOKEN}}
+@apikey = {{$dotenv APIKEY}}
 
 ### GET /
 
 GET http://localhost:3000/
 
 ### GET ALL USERS
+
 GET http://localhost:3000/auth/
 
 ### POST /register (register a new user)
 
 POST http://localhost:3000/auth/register 
 Content-Type: application/json
+apikey: {{apikey}}
 
 {
     "name": "New User",
@@ -26,8 +28,10 @@ Content-Type: application/json
 }
 
 ### post
+
 POST http://localhost:3000/auth/register 
 Content-Type: application/json
+apikey: {{apikey}}
 
 {
     "name": "dd",
@@ -40,6 +44,7 @@ Content-Type: application/json
 
 POST http://localhost:3000/auth/login 
 Content-Type: application/json
+apikey: {{apikey}}
 
 {
     "email": "testmail@gmail.com",
@@ -50,6 +55,7 @@ Content-Type: application/json
 
 POST http://localhost:3000/auth/login 
 Content-Type: application/json
+apikey: {{apikey}}
 
 {
     "username": "newuser",
@@ -57,8 +63,10 @@ Content-Type: application/json
 }
 
 ### DELETE /delete (delete a user) (protected)
-@deletionId = cmajp9hg80000tszx5oplpymr
-DELETE http://localhost:3000/auth/delete/{{deletionId}}
-Content-Type: application/json
-Authorization: {{adminToken}}
 
+@deletionId = cmajp9hg80000tszx5oplpymr
+
+DELETE http://localhost:3000/auth/delete/{{deletionId}} 
+Content-Type: application/json
+apikey: {{apikey}}
+Authorization: {{devtoken}}
