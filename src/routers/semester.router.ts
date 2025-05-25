@@ -22,10 +22,10 @@ router.get("/", async (req: Request, res: Response): Promise<any> => {
     if (!semesters) {
       return res.status(404).json({ message: "No semesters found." }); // Not Found
     }
-    res.status(200).json(semesters); // Send the semesters in the response
+    return res.status(200).json(semesters); // Send the semesters in the response
   } catch (error: any) {
     console.log(error.message);
-    res.sendStatus(500).json({ message: error.message }); // Internal Server Error
+    return res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 

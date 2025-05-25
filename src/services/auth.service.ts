@@ -1,12 +1,8 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import repo from "@repositories/auth.repository";
-import {
-  ConflictError,
-  InvalidError,
-  NotFoundError,
-} from "@utils/custom.error";
-import { User } from "@generated/prisma";
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import repo from '@repositories/auth.repository';
+import { ConflictError, InvalidError, NotFoundError } from '@utils/custom.error';
+import { User } from '@generated/prisma';
 
 class AuthService {
   // MARK: FIND ALL USERS
@@ -15,20 +11,15 @@ class AuthService {
   }
 
   // MARK:  REGISTER USER
-  async registerUser(
-    name: string,
-    email: string,
-    username: string,
-    password: string
-  ) {
+  async registerUser(name: string, email: string, username: string, password: string) {
     // Check if the user already exists
     const findUsername = await repo.getUniqueByUsername(username);
     const findEmail = await repo.getUniqueByEmail(email);
     if (findUsername) {
-      throw new ConflictError("Username already registered."); // Bad Request
+      throw new ConflictError('Username already registered.'); // Bad Request
     }
     if (findEmail) {
-      throw new ConflictError("Email already registered.");
+      throw new ConflictError('Email already registered.');
     }
 
     // Hash the password
@@ -54,12 +45,12 @@ class AuthService {
 
     const user = await repo.getFirstByIdentifier(identifier);
     if (!user) {
-      throw new InvalidError("Invalid username or password.");
+      throw new InvalidError('Invalid username or password.');
     }
 
     const isPasswordValid = this.validatePass(password, user);
     if (!isPasswordValid) {
-      throw new InvalidError("Invalid username of password.");
+      throw new InvalidError('Invalid username of password.');
     }
 
     // generate JWT token
@@ -80,7 +71,7 @@ class AuthService {
   async deleteUser(id: string) {
     const toDelete = await repo.getById(id);
     if (!toDelete) {
-      throw new NotFoundError("User not found!");
+      throw new NotFoundError('User not found!');
     }
 
     await repo.delete(id);
@@ -102,7 +93,7 @@ class AuthService {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
     return jwt.sign(userId, jwtSecret, {
-      expiresIn: "24h",
+      expiresIn: '24h',
     });
   }
 }
