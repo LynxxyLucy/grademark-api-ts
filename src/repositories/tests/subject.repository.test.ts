@@ -109,7 +109,7 @@ describe('SubjectRepository', () => {
         it('should create a new subject', async () => {
             vi.mocked(prisma.subject.create).mockResolvedValue(mockSubject);
 
-            const result = await subjectRepository.createNew('Mathematics', 'semester-id-1');
+            const result = await subjectRepository.create('Mathematics', 'semester-id-1');
 
             expect(prisma.subject.create).toHaveBeenCalledWith({
                 data: {
