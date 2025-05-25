@@ -1,30 +1,33 @@
-import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-declare global {
-  namespace Express {
-    interface Request {
-      userId?: string;
-    }
+// Define the JWT payload structure
+interface JWTPayload {
+  id: string;
+  key: string;
+}
+
+// Extend Express Request interface using module augmentation
+declare module 'express' {
+  interface Request {
+    userId?: string;
   }
 }
 
-function authMiddleware(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers["authorization"];
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers['authorization'];
 
   if (!token) {
-    return res.status(401).json({ message: "No token provided." });
+    res.status(401).send({ message: 'No token provided.' });
+  } else if (!process.env.JWT_SECRET) {
+    res.status(500).json({ message: 'Missing JWT Secret.' });
+  } else {
+    jwt.verify(token.toString(), process.env.JWT_SECRET, (error, decoded) => {
+      if (error) res.status(401).send({ message: 'Invalid token.' });
+      req.userId = (decoded as JWTPayload).id;
+    });
   }
-
-  if (!process.env.JWT_SECRET) {
-    return res.status(500).json({ message: "Missing JWT Secret." });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-    if (error) return res.status(401).send({ message: "Invalid token." });
-    req.userId = (decoded as any).id;
-    next();
-  });
-}
+  next();
+};
 
 export default authMiddleware;
