@@ -4,6 +4,8 @@
 
 @devUserId = {{$dotenv DEV_USER_ID}}
 
+@apiKey = {{$dotenv APIKEY}}
+
 ### FILE VARIABLEs
 
 @semesterId = cma5ecgn40003ts691d1lcup2
@@ -12,6 +14,7 @@
 
 GET http://localhost:3000/semesters
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -24,6 +27,7 @@ Authorization: {{devToken}}
 
 GET http://localhost:3000/semesters?search={{searchString}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -34,12 +38,14 @@ Authorization: {{devToken}}
 
 GET http://localhost:3000/semesters/{{semesterId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 ### POST /semesters (create a new semester) (protected)
 
 POST http://localhost:3000/semesters 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -53,6 +59,7 @@ Authorization: {{devToken}}
 
 PUT http://localhost:3000/semesters/{{updateId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -66,6 +73,7 @@ Authorization: {{devToken}}
 
 DELETE http://localhost:3000/semesters/{{deleteId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {

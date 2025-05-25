@@ -6,10 +6,13 @@
 
 @subjectName = "Test Subject"
 
+@apiKey = {{$dotenv APIKEY}}
+
 ### GET /grades (get all grades for a subject) (protected)
 
 GET http://localhost:3000/grades 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -20,6 +23,7 @@ Authorization: {{devToken}}
 
 POST http://localhost:3000/grades 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -35,6 +39,7 @@ Authorization: {{devToken}}
 
 PUT http://localhost:3000/grades/{{gradeId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -49,4 +54,5 @@ Authorization: {{devToken}}
 
 DELETE http://localhost:3000/grades/{{gradeId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}

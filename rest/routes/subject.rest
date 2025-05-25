@@ -1,4 +1,5 @@
 ### VARIABLES
+@apiKey = {{$dotenv APIKEY}}
 
 @devToken = {{$dotenv DEV_TOKEN}}
 
@@ -12,6 +13,7 @@
 
 GET http://localhost:3000/subjects 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -22,12 +24,14 @@ Authorization: {{devToken}}
 
 GET http://localhost:3000/subjects/{{subjectId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 ### CREATE /subjects (create a new subject) (protected)
 
 POST http://localhost:3000/subjects 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -41,6 +45,7 @@ Authorization: {{devToken}}
 
 PUT http://localhost:3000/subjects/{{updateId}}
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
@@ -53,4 +58,5 @@ Authorization: {{devToken}}
 
 DELETE http://localhost:3000/subjects/{{deleteId}} 
 Content-Type: application/json
+apikey: {{apiKey}}
 Authorization: {{devToken}}
