@@ -92,7 +92,7 @@ class AuthService {
     if (!jwtSecret) {
       throw new Error('JWT_SECRET is not defined in environment variables');
     }
-    return jwt.sign(userId, jwtSecret, {
+    return jwt.sign({ userId }, jwtSecret, {
       expiresIn: '24h',
     });
   }

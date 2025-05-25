@@ -13,6 +13,7 @@ GET http://localhost:3000/
 ### GET ALL USERS
 
 GET http://localhost:3000/auth/
+apikey: {{apikey}}
 
 ### POST /register (register a new user)
 
@@ -22,7 +23,7 @@ apikey: {{apikey}}
 
 {
     "name": "New User",
-    "email": "testmail6dd4@gmail.com",
+    "email": "testmail@test.com",
     "username": "newuser",
     "password": "newpassword"
 }
@@ -47,7 +48,7 @@ Content-Type: application/json
 apikey: {{apikey}}
 
 {
-    "email": "testmail@gmail.com",
+    "email": "testmail@test.com",
     "password": "newpassword"
 }
 
