@@ -18,7 +18,7 @@ app.use(express.json());
 // Health Router
 const health = express.Router();
 health.get('/', (req: Request, res: Response) => {
-  res.status(200).json('Healthy');
+  res.status(200).send('Healthy');
 });
 
 // App Route Definitions

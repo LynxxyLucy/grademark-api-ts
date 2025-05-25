@@ -7,7 +7,7 @@ describe('App', () => {
         it('should return 200 and "Healthy" text for GET /health', async () => {
             const response = await request(app).get('/health');
             expect(response.status).toBe(200);
-            expect(response.body).toBe('Healthy');
+            expect(response.text).toBe('Healthy');
         });
     });
 
