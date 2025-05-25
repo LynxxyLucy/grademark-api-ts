@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 const APIKEY = process.env.APIKEY;
 
 if (!APIKEY) {
-  console.warn('Warning: API_KEY is not set in environment variables');
+  console.warn('Warning: APIKEY is not set in environment variables');
 }
 
 const apiKeyMiddleware = (req: Request, res: Response, next: NextFunction) => {
