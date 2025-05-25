@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import repo from "@repositories/grade.repository";
-import { subjectSchema } from "../utils/joi.schemas";
 
 const router = express.Router();
 
