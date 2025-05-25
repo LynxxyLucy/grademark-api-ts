@@ -1,0 +1,52 @@
+### VARIABLES
+
+@devToken = {{$dotenv DEV_TOKEN}}
+
+@subjectId = cma5hmbvw00015bfjfe4i6cwr
+
+@subjectName = "Test Subject"
+
+### GET /grades (get all grades for a subject) (protected)
+
+GET http://localhost:3000/grades 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "subjectId": "{{subjectId}}"
+}
+
+### POST /grades (create a new grade) (protected)
+
+POST http://localhost:3000/grades 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "subjectId": "{{subjectId}}",
+    "grade": "5.0",
+    "type": "Stegreifaufgabe",
+    "date": "2025-01-05"
+}
+
+### PUT /grades (update a grade) (protected)
+
+@gradeId = cma6hhv510001tsj6umlmjrps
+
+PUT http://localhost:3000/grades/{{gradeId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "type": "Updated Type",
+    "grade": "4",
+    "date": "2025-01-05"
+}
+
+### DELETE /grades (delete a grade) (protected)
+
+@gradeId = cma6hhv510001tsj6umlmjrps
+
+DELETE http://localhost:3000/grades/{{gradeId}} 
+Content-Type: application/json
+Authorization: {{devToken}}

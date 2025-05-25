@@ -1,0 +1,64 @@
+### VARIABLES
+
+@devtoken = {{$dotenv DEV_TOKEN}}
+
+@devUserId = {{$dotenv DEV_USER_ID}}
+
+@adminToken = {{$dotenv ADMIN_TOKEN}}
+
+### GET /
+
+GET http://localhost:3000/
+
+### GET ALL USERS
+GET http://localhost:3000/auth/
+
+### POST /register (register a new user)
+
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "name": "New User",
+    "email": "testmail6dd4@gmail.com",
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### post
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "name": "dd",
+    "email": "dddtest.com",
+    "username": "ddd",
+    "password": "daaaa"
+}
+
+### POST /login (login a user)
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+
+{
+    "email": "testmail@gmail.com",
+    "password": "newpassword"
+}
+
+### POST /login (login with username)
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### DELETE /delete (delete a user) (protected)
+@deletionId = cmajp9hg80000tszx5oplpymr
+DELETE http://localhost:3000/auth/delete/{{deletionId}}
+Content-Type: application/json
+Authorization: {{adminToken}}
+
