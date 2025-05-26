@@ -1,24 +1,24 @@
 ### ENVIRONMENT VARIABLES
 
-@devToken = {{$dotenv DEV_USER_TOKEN}}
-
-@devUserId = {{$dotenv DEV_USER_ID}}
-
 @apiKey = {{$dotenv APIKEY}}
+
+@testUserToken = {{$dotenv TEST_USER_TOKEN}}
+
+@testUserId = {{$dotenv TEST_USER_ID}}
 
 ### FILE VARIABLEs
 
-@semesterId = c9e35bd4-d4cb-40c1-9cbd-714e4a0fee2d
+@semesterId = cmb5awkck0001c2xmhwyg126f
 
 ### GET /semesters (get all semesters for a user) (protected)
 
-GET http://localhost:3000/semesters
+GET http://localhost:3000/semesters 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "userId": "{{devUserId}}"
+    "userId": "{{testUserId}}"
 }
 
 ### GET /semesters?search="" (get a semester by string) (protected)
@@ -28,10 +28,10 @@ Authorization: {{devToken}}
 GET http://localhost:3000/semesters?search={{searchString}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "userId": "{{devUserId}}"
+    "userId": "{{testUserId}}"
 }
 
 ### GET /semesters/:id (get a semester by id with its subjects) (protected)
@@ -39,18 +39,18 @@ Authorization: {{devToken}}
 GET http://localhost:3000/semesters/{{semesterId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 ### POST /semesters (create a new semester) (protected)
 
 POST http://localhost:3000/semesters 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "semester": "test",
-    "userId": "{{devUserId}}"
+    "semester": "2024/25",
+    "userId": "{{testUserId}}"
 }
 
 ### PUT /semesters/:id (update a semester) (protected)
@@ -60,11 +60,11 @@ Authorization: {{devToken}}
 PUT http://localhost:3000/semesters/{{updateId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
     "semester": "2024/kdkdkdkd",
-    "userId": "{{devUserId}}"
+    "userId": "{{testUserId}}"
 }
 
 ### DELETE /semesters/:id (delete a semester) (protected)
@@ -74,8 +74,8 @@ Authorization: {{devToken}}
 DELETE http://localhost:3000/semesters/{{deleteId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "userId": "{{devUserId}}"
+    "userId": "{{testUserId}}"
 }

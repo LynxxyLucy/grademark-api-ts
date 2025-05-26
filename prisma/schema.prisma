@@ -46,7 +46,7 @@ model Grade {
   id        String   @id @default(cuid())
   type      String // e.g. "Exam", "Assignment", "Project", etc.
   grade     String // e.g. "A", "B", "C" or "1", "2", "3",...
-  date      DateTime // e.g. "2023-10-01"
+  date      DateTime // e.g. "2025-05-26T16:32:05.265Z"
   createdAt DateTime @default(now()) // UTC
   updatedAt DateTime @updatedAt // UTC
   subjectId String

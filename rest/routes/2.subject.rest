@@ -1,20 +1,21 @@
 ### VARIABLES
+
 @apiKey = {{$dotenv APIKEY}}
 
-@devToken = {{$dotenv DEV_USER_TOKEN}}
+@testUserToken = {{$dotenv TEST_USER_TOKEN}}
 
-@devUserId = {{$dotenv DEV_USER_ID}}
+@testUserId = {{$dotenv TEST_USER_ID}}
 
-@semesterId = cma5ecgn40003ts691d1lcup2
+@semesterId = cmb5awkck0001c2xmhwyg126f
 
-@subjectId = cma5hmbvw00015bfjfe4i6cwr
+@subjectId = cmb5b7abs0007c2s6ik8v9dlf
 
 ### GET /subjects (get all subjects) (protected)
 
 GET http://localhost:3000/subjects 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
     "semesterId": "{{semesterId}}"
@@ -22,41 +23,43 @@ Authorization: {{devToken}}
 
 ### GET /subjects/:id (get a subject by id) (protected)
 
-GET http://localhost:3000/subjects/{{subjectId}} 
+@getSubjId = cmb5b7abs0007c2s6ik8v9dlf
+
+GET http://localhost:3000/subjects/{{getSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 ### CREATE /subjects (create a new subject) (protected)
 
 POST http://localhost:3000/subjects 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "name": "Test",
+    "name": "Informatik",
     "semesterId": "{{semesterId}}"
 }
 
 ### UPDATE /subjects/:id (update a subject) (protected)
 
-@updateId = cma6j27310001ts7cxsxh8jxw
+@updateSubjId = cmb5axh2f0003c2xm2klocuw2
 
-PUT http://localhost:3000/subjects/{{updateId}}
+PUT http://localhost:3000/subjects/{{updateSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
-    "name": "Updated Subject"
+    "name": "Informatik"
 }
 
 ### DELETE /subjects/:id (delete a subject) (protected)
 
-@deleteId = cma6j27310001ts7cxsxh8jxw
+@deleteSubjId = cmb5axh2f0003c2xm2klocuw2
 
-DELETE http://localhost:3000/subjects/{{deleteId}} 
+DELETE http://localhost:3000/subjects/{{deleteSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}

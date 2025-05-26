@@ -1,19 +1,17 @@
 ### VARIABLES
 
-@devToken = {{$dotenv DEV_TOKEN}}
-
-@subjectId = cma5hmbvw00015bfjfe4i6cwr
-
-@subjectName = "Test Subject"
-
 @apiKey = {{$dotenv APIKEY}}
+
+@testUserToken = {{$dotenv TEST_USER_TOKEN}}
+
+@subjectId = cmb5b7abs0007c2s6ik8v9dlf
 
 ### GET /grades (get all grades for a subject) (protected)
 
 GET http://localhost:3000/grades 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
     "subjectId": "{{subjectId}}"
@@ -24,35 +22,35 @@ Authorization: {{devToken}}
 POST http://localhost:3000/grades 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
     "subjectId": "{{subjectId}}",
-    "grade": "5.0",
+    "grade": "2.3",
     "type": "Stegreifaufgabe",
-    "date": "2025-01-05"
+    "date": "2025-05-29T16:32:05.265Z"
 }
 
 ### PUT /grades (update a grade) (protected)
 
-@gradeId = cma6hhv510001tsj6umlmjrps
+@putGrade = cmb5bb7eo000fc2s6zc16xyad
 
-PUT http://localhost:3000/grades/{{gradeId}} 
+PUT http://localhost:3000/grades/{{putGrade}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}
 
 {
     "type": "Updated Type",
     "grade": "4",
-    "date": "2025-01-05"
+    "date": "2025-05-25T16:32:05.265Z"
 }
 
 ### DELETE /grades (delete a grade) (protected)
 
-@gradeId = cma6hhv510001tsj6umlmjrps
+@deleteGrade = cmb5b7o29000bc2s6j5i4ycgw
 
-DELETE http://localhost:3000/grades/{{gradeId}} 
+DELETE http://localhost:3000/grades/{{deleteGrade}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devToken}}
+Authorization: {{testUserToken}}

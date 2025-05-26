@@ -1,8 +1,8 @@
 ### VARIABLES
 
-@devtoken = {{$dotenv DEV_TOKEN}}
+@testUserToken = {{$dotenv TEST_USER_TOKEN}}
 
-@devUserId = {{$dotenv DEV_USER_ID}}
+@testUserId = {{$dotenv TEST_USER_ID}}
 
 @apiKey = {{$dotenv APIKEY}}
 
@@ -22,10 +22,10 @@ Content-Type: application/json
 apikey: {{apiKey}}
 
 {
-    "name": "New User2",
-    "email": "testmail2@test.com",
-    "username": "newuser2",
-    "password": "newpassword"
+    "name": "Test User",
+    "email": "testmail@test.com",
+    "username": "testuser",
+    "password": "testpassword"
 }
 
 ### post
@@ -49,7 +49,7 @@ apikey: {{apiKey}}
 
 {
     "email": "testmail@test.com",
-    "password": "newpassword"
+    "password": "testpassword"
 }
 
 ### POST /login (login with username)
@@ -59,8 +59,8 @@ Content-Type: application/json
 apikey: {{apiKey}}
 
 {
-    "username": "newuser",
-    "password": "newpassword"
+    "username": "testuser",
+    "password": "testpassword"
 }
 
 ### DELETE /delete (delete a user) (protected)
@@ -70,4 +70,4 @@ apikey: {{apiKey}}
 DELETE http://localhost:3000/auth/delete/{{deletionId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
-Authorization: {{devtoken}}
+Authorization: {{testUserToken}}

@@ -1,4 +1,4 @@
-import prisma from "@prisma.client";
+import prisma from '@prisma.client';
 
 class GradeRepository {
   async getAllForSubject(subjectId: string) {
@@ -25,7 +25,7 @@ class GradeRepository {
     });
   }
 
-  async create(subjectId: string, grade: string, type: string, date: Date ) {
+  async create(subjectId: string, grade: string, type: string, date: Date) {
     return await prisma.grade.create({
       data: {
         subjectId,
