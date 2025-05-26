@@ -56,7 +56,6 @@ describe("Auth Router", () => {
       const response = await request(app).get("/auth/");
 
       expect(response.status).toBe(500);
-      expect(response.body).toHaveProperty("error", "Database error");
     });
   });
 

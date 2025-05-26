@@ -6,6 +6,7 @@ import authRouter from '@routes/auth.router';
 import semesterRouter from '@routes/semester.router';
 import subjectRouter from '@routes/subject.router';
 import gradeRouter from '@routes/grade.router';
+import { errorHandler, routeNotFoundHandler } from './middleware/error.middleware';
 
 const app = express();
 const __dirname = __filename;
@@ -27,5 +28,8 @@ app.use('/auth', apikey, authRouter);
 app.use('/semesters', apikey, auth, semesterRouter);
 app.use('/subjects', apikey, auth, subjectRouter);
 app.use('/grades', apikey, auth, gradeRouter);
+
+app.use(routeNotFoundHandler);
+app.use(errorHandler);
 
 export default app;
