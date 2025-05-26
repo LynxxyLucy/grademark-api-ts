@@ -2,10 +2,10 @@ import express, { Request, Response } from 'express';
 import { join } from 'path';
 import apikey from './middleware/apikey.middleware';
 import auth from './middleware/auth.middleware';
-import authRouter from '@routes/auth.router';
-import semesterRouter from '@routes/semester.router';
-import subjectRouter from '@routes/subject.router';
-import gradeRouter from '@routes/grade.router';
+import authRouter from '@root/src/routers/0.auth.router';
+import semesterRouter from '@root/src/routers/1.semester.router';
+import subjectRouter from '@root/src/routers/2.subject.router';
+import gradeRouter from '@root/src/routers/3.grade.router';
 import { errorHandler, routeNotFoundHandler } from './middleware/error.middleware';
 
 const app = express();
