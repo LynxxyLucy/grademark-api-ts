@@ -1,7 +1,5 @@
 import express from 'express';
 import service from '@services/auth.service';
-import { InvalidError } from '@utils/custom.error';
-import { userSchema } from '@utils/joi.schemas';
 
 const router = express.Router();
 
@@ -19,19 +17,14 @@ router.get('/', async (req, res, next) => {
 
 // MARK:  REGISTER
 router.post('/register', async (req, res, next) => {
-  console.log(req.body);
+  console.log('Request body:', req.body); // Log the request body
 
   try {
     // Validate Input
-    const { error: e, value: v } = userSchema.validate(req.body);
-    if (e) {
-      throw new InvalidError(e.message);
-    }
-
+    const v = service.validateInput(req.body);
     const newUser = await service.registerUser(v.name, v.email, v.username, v.password);
     res.status(201).json({ message: 'New user created.', newUser });
   } catch (error) {
-    console.log(error);
     next(error);
     /* if (error instanceof ConflictError) {
       return res.status(400).json({ message: error.message });

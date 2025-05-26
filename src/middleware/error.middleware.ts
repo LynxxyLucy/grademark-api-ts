@@ -1,26 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
 import * as custom from '@utils/custom.error';
 
-export const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction): void => {
+export const errorHandler = (err: Error, _req: Request, res: Response): Response => {
   console.error(err.stack);
 
-  const errorObject = { error: err.name, message: err.message };
-  let httpStatus = 500;
+  const errObj = { error: err.name, message: err.message };
+  let httpStatus;
 
-  if (err instanceof custom.ConflictError) {
-    httpStatus = 409;
+  if (
+    err instanceof custom.ConflictError ||
+    err instanceof custom.NotFoundError ||
+    err instanceof custom.InvalidError
+  ) {
+    httpStatus = err.statusCode;
+  } else {
+    httpStatus = 300;
   }
 
-  if (err instanceof custom.NotFoundError) {
-    httpStatus = 404;
-  }
-
-  if (err instanceof custom.InvalidError) {
-    httpStatus = 418;
-  }
-
-  res.status(httpStatus).json(errorObject);
-  next();
+  return res.status(httpStatus).json(errObj);
 };
 
 export const routeNotFoundHandler = (req: Request, res: Response, next: NextFunction): void => {

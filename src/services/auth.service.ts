@@ -3,10 +3,19 @@ import jwt from 'jsonwebtoken';
 import repo from '@repositories/auth.repository';
 import { ConflictError, InvalidError, NotFoundError } from '@utils/custom.error';
 import { User } from '@generated/prisma';
+import { userSchema } from '../utils/joi.schemas';
 
 class AuthService {
+  validateInput(data: unknown) {
+    const { error: e, value: v } = userSchema.validate(data);
+    if (e) {
+      throw new InvalidError(e.message);
+    }
+    return v;
+  }
+
   // MARK: FIND ALL USERS
-  async findAllUsers() {
+  async findAllUsers(): Promise<User[]> {
     return await repo.getAll();
   }
 
@@ -79,6 +88,7 @@ class AuthService {
   }
 
   // MARK: - HELPERS
+
   hashPass(password: string) {
     return bcrypt.hashSync(password, 16);
   }
