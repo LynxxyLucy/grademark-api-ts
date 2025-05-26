@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import authRouter from '../auth.router';
-import service from '../../services/auth.service';
+import authRouter from '../0.auth.router';
+import service from '../../services/0.auth.service';
 import { ConflictError, InvalidError, NotFoundError, ServerError } from '../../utils/custom.error';
 import { errorHandler } from '../../middleware/error.middleware';
 
 // Mock the auth service
-vi.mock('../../services/auth.service', () => ({
+vi.mock('../../services/0.auth.service', () => ({
   default: {
     validateInput: vi.fn(),
     registerUser: vi.fn(),

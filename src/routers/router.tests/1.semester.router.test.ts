@@ -1,12 +1,12 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import request from 'supertest';
 import express from 'express';
-import semesterRouter from '../semester.router';
-import semesterService from '../../services/semester.service';
+import semesterRouter from '../1.semester.router';
+import semesterService from '../../services/1.semester.service';
 import { errorHandler } from '../../middleware/error.middleware';
 
 // Mock the semester service
-vi.mock('../../services/semester.service', () => ({
+vi.mock('../../services/1.semester.service', () => ({
   default: {
     getAllForUser: vi.fn(),
     getUniqueByIdWithSubjects: vi.fn(),

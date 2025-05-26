@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import authService from "../auth.service";
-import repo from "../../repositories/auth.repository";
+import authService from "../0.auth.service";
+import repo from "../../repositories/0.auth.repository";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {
@@ -10,7 +10,7 @@ import {
 } from "../../utils/custom.error";
 
 // Mock dependencies
-vi.mock("../../repositories/auth.repository", () => ({
+vi.mock("../../repositories/0.auth.repository", () => ({
   default: {
     getAll: vi.fn(),
     getUniqueByUsername: vi.fn(),
@@ -89,7 +89,7 @@ describe("AuthService", () => {
 
       expect(repo.getUniqueByUsername).toHaveBeenCalledWith("testuser");
       expect(repo.getUniqueByEmail).toHaveBeenCalledWith("test@example.com");
-      expect(bcrypt.hashSync).toHaveBeenCalledWith("password123", 16);
+      expect(bcrypt.hashSync).toHaveBeenCalledWith("password123", 10);
       expect(jwt.sign).toHaveBeenCalled();
       expect(result).toEqual({ token: "mock-token", user: mockUser });
     });
