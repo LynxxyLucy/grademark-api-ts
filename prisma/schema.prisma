@@ -40,6 +40,8 @@ model Subject {
   semesterId String
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   grades     Grade[]
+
+  @@index([semesterId], type: Hash) // Index for faster lookups by semesterId)
 }
 
 model Grade {
@@ -51,4 +53,6 @@ model Grade {
   updatedAt DateTime @updatedAt // UTC
   subjectId String
   subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@index([subjectId], type: Hash) // Index for faster lookups by subjectId
 }
