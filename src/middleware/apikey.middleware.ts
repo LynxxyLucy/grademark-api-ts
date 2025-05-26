@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { UnauthorizedError } from '../utils/custom.error';
 
 const APIKEY = process.env.APIKEY;
 const NODE_ENV = process.env.NODE_ENV;
@@ -17,10 +18,7 @@ const apiKeyMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   // Check if API key is valid
   if (!apiKey || apiKey !== APIKEY) {
-    res.status(401).json({
-      error: 'Unauthorized',
-      message: 'Invalid or missing API key',
-    });
+    throw new UnauthorizedError('Invalid or missing API key');
   }
 
   next();

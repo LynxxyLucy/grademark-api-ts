@@ -35,3 +35,21 @@ export class InvalidError extends CustomError {
     Error.captureStackTrace(this, this.constructor);
   }
 }
+
+export class ServerError extends CustomError {
+  constructor(message: string) {
+    super(message);
+    this.name = "ServerError";
+    this.statusCode = 500; // Internal Server Error
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export class UnauthorizedError extends CustomError {
+  constructor(message: string) {
+    super(message);
+    this.name = "UnauthorizedError";
+    this.statusCode = 403; // Unauthorized
+    Error.captureStackTrace(this, this.constructor);
+  }
+}

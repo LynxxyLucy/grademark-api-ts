@@ -3,7 +3,8 @@ import request from 'supertest';
 import express from 'express';
 import authRouter from '../auth.router';
 import service from '../../services/auth.service';
-import { ConflictError, InvalidError, NotFoundError } from '../../utils/custom.error';
+import { ConflictError, InvalidError, NotFoundError, ServerError } from '../../utils/custom.error';
+import { errorHandler } from '../../middleware/error.middleware';
 
 // Mock the auth service
 vi.mock('../../services/auth.service', () => ({
@@ -19,6 +20,7 @@ vi.mock('../../services/auth.service', () => ({
 const app = express();
 app.use(express.json());
 app.use('/auth', authRouter);
+app.use(errorHandler);
 
 describe('Auth Router', () => {
   beforeEach(() => {
@@ -104,17 +106,18 @@ describe('Auth Router', () => {
         username: 'test',
         password: '123',
       };
-      
+
       // Mock the validation to throw an InvalidError
       vi.mocked(service.validateInput).mockImplementation(() => {
         throw new InvalidError('Validation failed');
       });
 
       const response = await request(app).post('/auth/register').send(invalidUser);
-      
+
       expect(service.validateInput).toHaveBeenCalledTimes(1);
-      expect(service.validateInput).toHaveBeenCalledWith({...invalidUser});
-      // expect(response.body).toHaveProperty('message', 'Validation failed');
+      expect(service.validateInput).toHaveBeenCalledWith({ ...invalidUser });
+      console.log(response);
+      expect(response.body).toHaveProperty('message', 'Validation failed');
       expect(response.status).toBe(418);
     });
 
@@ -132,7 +135,7 @@ describe('Auth Router', () => {
       const response = await request(app).post('/auth/register').send(duplicateUser);
 
       expect(response.status).toBe(409);
-      // expect(response.body).toHaveProperty('message', 'Invalid: User already exists.');
+      expect(response.body).toHaveProperty('message', 'User already exists.');
     });
 
     it('should return 500 on server error', async () => {
@@ -143,11 +146,14 @@ describe('Auth Router', () => {
         password: 'password1234',
       };
 
-      vi.mocked(service.registerUser).mockRejectedValue(new Error('Database error'));
+      vi.mocked(service.validateInput).mockReturnValue(newUser);
+      vi.mocked(service.registerUser).mockRejectedValue(new ServerError('Database error'));
 
       const response = await request(app).post('/auth/register').send(newUser);
 
+      console.log(response.body);
       expect(response.status).toBe(500);
+      expect(response.body).toHaveProperty('message', 'Database error');
     });
   });
 
@@ -190,7 +196,7 @@ describe('Auth Router', () => {
       const response = await request(app).post('/auth/login').send(invalidLogin);
 
       expect(response.status).toBe(418);
-      // expect(response.body).toHaveProperty('message', 'Invalid credentials');
+      expect(response.body).toHaveProperty('message', 'Invalid credentials');
     });
 
     it('should return 500 on server error', async () => {
@@ -205,7 +211,7 @@ describe('Auth Router', () => {
       const response = await request(app).post('/auth/login').send(loginData);
 
       expect(response.status).toBe(500);
-      // expect(response.body).toHaveProperty('message', 'Database error');
+      expect(response.body).toHaveProperty('message', 'Database error');
     });
   });
 
@@ -235,7 +241,7 @@ describe('Auth Router', () => {
       const response = await request(app).delete(`/auth/delete/${nonExistentId}`);
 
       expect(response.status).toBe(404);
-      // expect(response.body).toContain("message");
+      expect(response.body).toHaveProperty('message', 'User not found');
     });
 
     it('should return 500 on server error', async () => {
