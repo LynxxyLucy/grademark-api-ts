@@ -11,7 +11,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id        String     @id @default(uuid())
   name      String
@@ -38,18 +37,18 @@ model Subject {
   name       String   @unique // e.g. "Mathematics", "Physics", etc.
   createdAt  DateTime @default(now()) // UTC
   updatedAt  DateTime @updatedAt // UTC
-  semesterId String   
+  semesterId String
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   grades     Grade[]
 }
 
 model Grade {
-  id          String   @id @default(cuid())
-  type        String // e.g. "Exam", "Assignment", "Project", etc.
-  grade       String // e.g. "A", "B", "C" or "1", "2", "3",...
-  date        DateTime // e.g. "2023-10-01"
-  createdAt   DateTime @default(now()) // UTC
-  updatedAt   DateTime @updatedAt // UTC
-  subjectId   String
-  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  type      String // e.g. "Exam", "Assignment", "Project", etc.
+  grade     String // e.g. "A", "B", "C" or "1", "2", "3",...
+  date      DateTime // e.g. "2023-10-01"
+  createdAt DateTime @default(now()) // UTC
+  updatedAt DateTime @updatedAt // UTC
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
