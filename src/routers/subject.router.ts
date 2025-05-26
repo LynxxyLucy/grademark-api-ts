@@ -1,5 +1,5 @@
 import express from 'express';
-import repo from '@repositories/subject.repository';
+import repo from '@root/src/repositories/2.subject.repository';
 
 const router = express.Router();
 

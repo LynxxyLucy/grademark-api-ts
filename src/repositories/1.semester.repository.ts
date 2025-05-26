@@ -1,5 +1,5 @@
 import prisma from '@prisma.client';
-import subjectRepo from './subject.repository';
+import subjectRepo from './2.subject.repository';
 
 class SemesterRepository {
   async getManyBySearch(search: string, userId: string) {

@@ -1,4 +1,4 @@
-import repo from '@repositories/grade.repository';
+import repo from '@root/src/repositories/3.grade.repository';
 import { NotFoundError } from '@utils/custom.error';
 
 class GradeService {

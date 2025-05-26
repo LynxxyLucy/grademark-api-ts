@@ -1,6 +1,5 @@
 import prisma from "@prisma.client";
 import { User } from "@generated/prisma";
-import { NotFoundError } from "../utils/custom.error";
 
 class AuthRepository {
   async getAll(): Promise<User[]> {

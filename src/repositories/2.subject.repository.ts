@@ -1,5 +1,5 @@
 import prisma from "@prisma.client"
-import gradeRepo from "./grade.repository";
+import gradeRepo from "./3.grade.repository";
 
 class SubjectRepository {
   async getAllForSemester(semesterId: string) {
