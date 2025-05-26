@@ -1,5 +1,5 @@
-import prisma from "@prisma.client";
-import subjectRepo from "./subject.repository";
+import prisma from '@prisma.client';
+import subjectRepo from './subject.repository';
 
 class SemesterRepository {
   async getManyBySearch(search: string, userId: string) {
@@ -23,6 +23,15 @@ class SemesterRepository {
     return await prisma.semester.findUnique({
       where: {
         id,
+      },
+    });
+  }
+
+  async getUniqueByName(semester: string, userId: string) {
+    return await prisma.semester.findUnique({
+      where: {
+        semester, // Convert semester to string
+        userId,
       },
     });
   }

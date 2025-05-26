@@ -1,8 +1,10 @@
 ### ENVIRONMENT VARIABLES
 
-@devToken = {{$dotenv DEV_TOKEN}}
+# @devToken = {{$dotenv DEV_TOKEN}}
+@devToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MWZkMmNmOC1iOThkLTQ2ZTItYTA4Zi1lODY2ZWZmYzMzNjQiLCJpYXQiOjE3NDgyNjkzNjEsImV4cCI6MTc0ODM1NTc2MX0.lS_GhyRk8sE5OWtArnkAvv2EiWs9Y63C8XxwCLaRbko
 
-@devUserId = {{$dotenv DEV_USER_ID}}
+# @devUserId = {{$dotenv DEV_USER_ID}}
+@devUserId = 51fd2cf8-b98d-46e2-a08f-e866effc3364
 
 @apiKey = {{$dotenv APIKEY}}
 
@@ -49,13 +51,13 @@ apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
-    "semester": "test",
+    "semester": "test3",
     "userId": "{{devUserId}}"
 }
 
 ### PUT /semesters/:id (update a semester) (protected)
 
-@updateId = cma5f7fmz0001tscj9a24y61x
+@updateId = a61c9245-d562-4250-9f95-12d85a5c8ab1
 
 PUT http://localhost:3000/semesters/{{updateId}} 
 Content-Type: application/json
@@ -69,7 +71,7 @@ Authorization: {{devToken}}
 
 ### DELETE /semesters/:id (delete a semester) (protected)
 
-@deleteId = cma5f7fmz0001tscj9a24y61x
+@deleteId = a61c9245-d562-4250-9f95-12d85a5c8ab1
 
 DELETE http://localhost:3000/semesters/{{deleteId}} 
 Content-Type: application/json

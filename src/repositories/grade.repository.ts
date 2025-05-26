@@ -9,6 +9,14 @@ class GradeRepository {
     });
   }
 
+  async getById(id: string) {
+    return await prisma.grade.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async checkSubjectExistance(subjectId: string) {
     return await prisma.subject.findUnique({
       where: {
@@ -28,7 +36,7 @@ class GradeRepository {
     });
   }
 
-  async update(id: string, grade: string, type: string, date: string) {
+  async update(id: string, grade: string, type: string, date: Date) {
     return await prisma.grade.update({
       where: {
         id,
