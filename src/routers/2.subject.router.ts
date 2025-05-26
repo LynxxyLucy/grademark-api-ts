@@ -1,5 +1,6 @@
 import express from 'express';
 import repo from '@root/src/repositories/2.subject.repository';
+import service from '@services/2.subject.service';
 
 const router = express.Router();
 
@@ -70,8 +71,8 @@ router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedSubject = await repo.delete(id);
-    res.status(200).json({ message: 'Subject deleted.', deletedSubject }); // Send the deleted subject in the response
+    const deletedSubject = await service.delete(id);
+    res.status(200).json({ message: 'Subject deleted.', subject: deletedSubject.name }); // Send the deleted subject in the response
   } catch (error) {
     next(error);
     // console.log(error.message);

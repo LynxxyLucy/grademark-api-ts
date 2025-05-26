@@ -18,6 +18,15 @@ class SubjectRepository {
     });
   }
 
+  async getUniqueByName(name: string, semesterId: string) {
+    return await prisma.subject.findFirst({
+      where: {
+        name,
+        semesterId,
+      },
+    });
+  }
+
   async getUniqueWithGrades(id: string ) {
     try {
       const subject = await this.getUnique(id);
