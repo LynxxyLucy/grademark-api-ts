@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { User } from "../../../generated/prisma";
-import authRepository from "../auth.repository";
+import authRepository from "../0.auth.repository";
 import prisma from "../../../prisma.client";
 
 // Mock the prisma client

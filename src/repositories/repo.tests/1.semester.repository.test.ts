@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import prisma from "../../../prisma.client";
-import semesterRepository from "../semester.repository";
-import subjectRepo from "../subject.repository";
+import semesterRepository from "../1.semester.repository";
+import subjectRepo from "../2.subject.repository";
 
 // Mock the Prisma client and subject repository
 vi.mock("../../../prisma.client", () => ({
@@ -16,7 +16,7 @@ vi.mock("../../../prisma.client", () => ({
   },
 }));
 
-vi.mock("../subject.repository", () => ({
+vi.mock("../2.subject.repository", () => ({
   default: {
     getAllForSemester: vi.fn().mockResolvedValue([]),
   },
@@ -103,8 +103,8 @@ describe("SemesterRepository", () => {
     it("should return a semester with its subjects", async () => {
       // Arrange
       const mockSubjects = [
-        { id: "sub1", name: "Math" },
-        { id: "sub2", name: "Science" },
+        { id: "sub1", name: "Math", createdAt: new Date(), updatedAt: new Date(), semesterId: 'asdf' },
+        { id: "sub2", name: "Science", createdAt: new Date(), updatedAt: new Date(), semesterId: 'asdf' },
       ];
       prisma.semester.findUnique.mockResolvedValue(mockSemester);
       vi.mocked(subjectRepo.getAllForSemester).mockResolvedValue(mockSubjects);

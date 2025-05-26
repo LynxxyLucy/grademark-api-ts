@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import prisma from '../../../prisma.client';
-import subjectRepository from '../subject.repository';
-import gradeRepository from '../grade.repository';
+import subjectRepository from '../2.subject.repository';
+import gradeRepository from '../3.grade.repository';
 
 // Mock the Prisma client and grade repository
 vi.mock('../../../prisma.client', () => ({
@@ -16,7 +16,7 @@ vi.mock('../../../prisma.client', () => ({
     },
 }));
 
-vi.mock('../grade.repository', () => ({
+vi.mock('../3.grade.repository', () => ({
     default: {
         getAllForSubject: vi.fn(),
     },
