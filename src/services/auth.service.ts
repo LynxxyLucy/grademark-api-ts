@@ -16,7 +16,11 @@ class AuthService {
 
   // MARK: FIND ALL USERS
   async findAllUsers(): Promise<User[]> {
-    return await repo.getAll();
+    const users = await repo.getAll();
+    if (!users || users.length === 0) {
+      throw new NotFoundError('No users found.');
+    }
+    return users;
   }
 
   // MARK:  REGISTER USER
@@ -90,7 +94,7 @@ class AuthService {
   // MARK: - HELPERS
 
   hashPass(password: string) {
-    return bcrypt.hashSync(password, 16);
+    return bcrypt.hashSync(password, 10);
   }
 
   validatePass(password: string, user: User) {

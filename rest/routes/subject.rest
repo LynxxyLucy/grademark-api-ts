@@ -1,7 +1,7 @@
 ### VARIABLES
 @apiKey = {{$dotenv APIKEY}}
 
-@devToken = {{$dotenv DEV_TOKEN}}
+@devToken = {{$dotenv DEV_USER_TOKEN}}
 
 @devUserId = {{$dotenv DEV_USER_ID}}
 

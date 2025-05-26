@@ -22,9 +22,9 @@ Content-Type: application/json
 apikey: {{apiKey}}
 
 {
-    "name": "New User",
-    "email": "testmail@test.com",
-    "username": "newuser",
+    "name": "New User2",
+    "email": "testmail2@test.com",
+    "username": "newuser2",
     "password": "newpassword"
 }
 
@@ -65,7 +65,7 @@ apikey: {{apiKey}}
 
 ### DELETE /delete (delete a user) (protected)
 
-@deletionId = cmajp9hg80000tszx5oplpymr
+@deletionId = 021bfcb3-34b2-47a7-ae61-ee7cfbc6e162
 
 DELETE http://localhost:3000/auth/delete/{{deletionId}} 
 Content-Type: application/json

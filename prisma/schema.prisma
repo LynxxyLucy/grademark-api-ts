@@ -24,8 +24,8 @@ model User {
 }
 
 model Semester {
-  id        String    @id @default(uuid())
-  semester  String    @unique
+  id        String    @id @default(cuid())
+  semester  String    @unique // e.g. "Winter 2023/24"
   createdAt DateTime  @default(now()) // UTC
   updatedAt DateTime  @updatedAt // UTC
   userId    String
@@ -34,17 +34,17 @@ model Semester {
 }
 
 model Subject {
-  id         String   @id @default(uuid())
-  name       String
+  id         String   @id @default(cuid())
+  name       String   @unique // e.g. "Mathematics", "Physics", etc.
   createdAt  DateTime @default(now()) // UTC
   updatedAt  DateTime @updatedAt // UTC
-  semesterId String
+  semesterId String   
   semester   Semester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
   grades     Grade[]
 }
 
 model Grade {
-  id          String   @id @default(uuid())
+  id          String   @id @default(cuid())
   type        String // e.g. "Exam", "Assignment", "Project", etc.
   grade       String // e.g. "A", "B", "C" or "1", "2", "3",...
   date        DateTime // e.g. "2023-10-01"

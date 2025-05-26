@@ -1,16 +1,14 @@
 ### ENVIRONMENT VARIABLES
 
-# @devToken = {{$dotenv DEV_TOKEN}}
-@devToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MWZkMmNmOC1iOThkLTQ2ZTItYTA4Zi1lODY2ZWZmYzMzNjQiLCJpYXQiOjE3NDgyNjkzNjEsImV4cCI6MTc0ODM1NTc2MX0.lS_GhyRk8sE5OWtArnkAvv2EiWs9Y63C8XxwCLaRbko
+@devToken = {{$dotenv DEV_USER_TOKEN}}
 
-# @devUserId = {{$dotenv DEV_USER_ID}}
-@devUserId = 51fd2cf8-b98d-46e2-a08f-e866effc3364
+@devUserId = {{$dotenv DEV_USER_ID}}
 
 @apiKey = {{$dotenv APIKEY}}
 
 ### FILE VARIABLEs
 
-@semesterId = cma5ecgn40003ts691d1lcup2
+@semesterId = c9e35bd4-d4cb-40c1-9cbd-714e4a0fee2d
 
 ### GET /semesters (get all semesters for a user) (protected)
 
@@ -36,7 +34,7 @@ Authorization: {{devToken}}
     "userId": "{{devUserId}}"
 }
 
-### GET /semesters/:id (get a semester by id) (protected)
+### GET /semesters/:id (get a semester by id with its subjects) (protected)
 
 GET http://localhost:3000/semesters/{{semesterId}} 
 Content-Type: application/json
@@ -51,7 +49,7 @@ apikey: {{apiKey}}
 Authorization: {{devToken}}
 
 {
-    "semester": "test3",
+    "semester": "test",
     "userId": "{{devUserId}}"
 }
 
