@@ -3,10 +3,15 @@ import { CustomError, TeapotError } from '@utils/custom.error';
 
 export const routeNotFoundHandler = (req: Request, res: Response, next: NextFunction): void => {
   if (req.method === 'GET' && req.originalUrl === '/') {
-    // Ignore favicon requests
     res.status(200).json("uwu, I'm alive! :3");
     return;
   }
+
+  if (req.method === 'GET' && req.originalUrl === '/favicon.ico') {
+    res.status(204).send(); // No content for favicon
+    return;
+  }
+  
   const error = new TeapotError(`Hi :3 Ur silly, this doesnt exist: ${req.originalUrl}`);
   next(error);
 };
