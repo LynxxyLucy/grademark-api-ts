@@ -9,7 +9,6 @@ router.get('/', async (req, res, next) => {
   const { search } = req.query; // Get semester from query parameters
 
   try {
-    
     const semesters = await service.getAllForUser(userId, search as string);
     res.status(200).json(semesters); // Send the semesters in the response
   } catch (error) {

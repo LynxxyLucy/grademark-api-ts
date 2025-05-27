@@ -13,8 +13,6 @@ router.get('/', async (req, res, next) => {
     res.status(200).json(subjects); // Send the subjects in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -24,16 +22,9 @@ router.get('/:id', async (req, res, next) => {
 
   try {
     const subject = await service.getUniqueByIdWithGrades(id);
-
-    if (!subject) {
-      res.status(404).json({ message: 'Subject not found.' }); // Not Found
-    }
-
     res.status(200).json(subject); // Send the subject in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.status(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -46,8 +37,6 @@ router.post('/', async (req, res, next) => {
     res.status(201).json({ message: 'Subject created.', newSubject }); // Send the new subject in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -61,8 +50,6 @@ router.put('/:id', async (req, res, next) => {
     res.status(200).json({ message: 'Subject updated.', updatedSubject }); // Send the updated subject in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -75,8 +62,6 @@ router.delete('/:id', async (req, res, next) => {
     res.status(200).json({ message: 'Subject deleted.', subject: deletedSubject.name }); // Send the deleted subject in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 

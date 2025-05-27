@@ -15,8 +15,6 @@ router.get('/', async (req, res, next) => {
     res.status(200).json(grades); // Send the grades in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -30,8 +28,6 @@ router.get('/:subjectId', async (req, res, next) => {
     res.status(200).json(grades); // Send the grades in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -44,8 +40,6 @@ router.post('/', async (req, res, next) => {
     res.status(201).json({ message: 'Grade created.', newGrade }); // Send the new grade in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -61,8 +55,6 @@ router.put('/:id', async (req, res, next) => {
     res.status(200).json({ message: 'Grade updated.', updatedGrade }); // Send the updated grade in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
@@ -75,8 +67,6 @@ router.delete('/:id', async (req, res, next) => {
     res.status(200).json({ message: 'Grade deleted.', deletedGrade }); // Send the success message in the response
   } catch (error) {
     next(error);
-    // console.log(error.message);
-    // res.sendStatus(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
