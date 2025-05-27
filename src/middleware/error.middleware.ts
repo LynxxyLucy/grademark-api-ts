@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { CustomError, TeapotError } from '@utils/custom.error';
 
 export const routeNotFoundHandler = (req: Request, res: Response, next: NextFunction): void => {
-  const error = new TeapotError(`Silly, this doesnt exist: ${req.originalUrl}`);
+  const error = new TeapotError(`Hi :3 Ur silly, this doesnt exist: ${req.originalUrl}`);
   next(error);
 };
 
