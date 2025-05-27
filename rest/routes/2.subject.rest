@@ -10,9 +10,13 @@
 
 @subjectId = cmb5b7abs0007c2s6ik8v9dlf
 
+@url = http://localhost:3000
+
+@url = {{$dotenv DEV_PROD_URL}}
+
 ### GET /subjects (get all subjects) (protected)
 
-GET http://localhost:3000/subjects 
+GET {{url}}/subjects 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -25,14 +29,14 @@ Authorization: {{testUserToken}}
 
 @getSubjId = cmb5b7abs0007c2s6ik8v9dlf
 
-GET http://localhost:3000/subjects/{{getSubjId}} 
+GET {{url}}/subjects/{{getSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
 
 ### CREATE /subjects (create a new subject) (protected)
 
-POST http://localhost:3000/subjects 
+POST {{url}}/subjects 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -46,7 +50,7 @@ Authorization: {{testUserToken}}
 
 @updateSubjId = cmb5axh2f0003c2xm2klocuw2
 
-PUT http://localhost:3000/subjects/{{updateSubjId}} 
+PUT {{url}}/subjects/{{updateSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -59,7 +63,7 @@ Authorization: {{testUserToken}}
 
 @deleteSubjId = cmb5axh2f0003c2xm2klocuw2
 
-DELETE http://localhost:3000/subjects/{{deleteSubjId}} 
+DELETE {{url}}/subjects/{{deleteSubjId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}

@@ -6,13 +6,17 @@
 
 @testUserId = {{$dotenv TEST_USER_ID}}
 
+@url = http://localhost:3000
+
+@url = {{$dotenv DEV_PROD_URL}}
+
 ### FILE VARIABLEs
 
 @semesterId = cmb5awkck0001c2xmhwyg126f
 
 ### GET /semesters (get all semesters for a user) (protected)
 
-GET http://localhost:3000/semesters 
+GET {{url}}/semesters 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -23,9 +27,9 @@ Authorization: {{testUserToken}}
 
 ### GET /semesters?search="" (get a semester by string) (protected)
 
-@searchString = 27
+@searchString = 25
 
-GET http://localhost:3000/semesters?search={{searchString}} 
+GET {{url}}/semesters?search={{searchString}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -36,14 +40,14 @@ Authorization: {{testUserToken}}
 
 ### GET /semesters/:id (get a semester by id with its subjects) (protected)
 
-GET http://localhost:3000/semesters/{{semesterId}} 
+GET {{url}}/semesters/{{semesterId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
 
 ### POST /semesters (create a new semester) (protected)
 
-POST http://localhost:3000/semesters 
+POST {{url}}/semesters 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -57,7 +61,7 @@ Authorization: {{testUserToken}}
 
 @updateId = a61c9245-d562-4250-9f95-12d85a5c8ab1
 
-PUT http://localhost:3000/semesters/{{updateId}} 
+PUT {{url}}/semesters/{{updateId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -71,7 +75,7 @@ Authorization: {{testUserToken}}
 
 @deleteId = a61c9245-d562-4250-9f95-12d85a5c8ab1
 
-DELETE http://localhost:3000/semesters/{{deleteId}} 
+DELETE {{url}}/semesters/{{deleteId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}

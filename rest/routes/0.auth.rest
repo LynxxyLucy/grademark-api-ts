@@ -6,31 +6,35 @@
 
 @apiKey = {{$dotenv APIKEY}}
 
+@url = http://localhost:3000
+
+@url = {{$dotenv DEV_PROD_URL}}
+
 ### GET /
 
-GET http://localhost:3000/
+GET {{url}}/
 
 ### GET ALL USERS
 
-GET http://localhost:3000/auth/
+GET {{url}}/auth/
 apikey: {{apiKey}}
 
 ### POST /register (register a new user)
 
-POST http://localhost:3000/auth/register 
+POST {{url}}/auth/register 
 Content-Type: application/json
 apikey: {{apiKey}}
 
 {
     "name": "Test User",
-    "email": "testmail@test.com",
-    "username": "testuser",
+    "email": "testmail1@test.com",
+    "username": "testuser1",
     "password": "testpassword"
 }
 
 ### post
 
-POST http://localhost:3000/auth/register 
+POST {{url}}/auth/register 
 Content-Type: application/json
 apikey: {{apiKey}}
 
@@ -43,7 +47,7 @@ apikey: {{apiKey}}
 
 ### POST /login (login a user)
 
-POST http://localhost:3000/auth/login 
+POST {{url}}/auth/login 
 Content-Type: application/json
 apikey: {{apiKey}}
 
@@ -54,7 +58,7 @@ apikey: {{apiKey}}
 
 ### POST /login (login with username)
 
-POST http://localhost:3000/auth/login 
+POST {{url}}/auth/login 
 Content-Type: application/json
 apikey: {{apiKey}}
 
@@ -67,7 +71,7 @@ apikey: {{apiKey}}
 
 @deletionId = 021bfcb3-34b2-47a7-ae61-ee7cfbc6e162
 
-DELETE http://localhost:3000/auth/delete/{{deletionId}} 
+DELETE {{url}}/auth/delete/{{deletionId}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}

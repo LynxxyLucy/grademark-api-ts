@@ -6,9 +6,13 @@
 
 @subjectId = cmb5b7abs0007c2s6ik8v9dlf
 
+@url = http://localhost:3000
+
+@url = {{$dotenv DEV_PROD_URL}}
+
 ### GET /grades (get all grades for a subject) (protected)
 
-GET http://localhost:3000/grades 
+GET {{url}}/grades 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -19,7 +23,7 @@ Authorization: {{testUserToken}}
 
 ### POST /grades (create a new grade) (protected)
 
-POST http://localhost:3000/grades 
+POST {{url}}/grades 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -35,7 +39,7 @@ Authorization: {{testUserToken}}
 
 @putGrade = cmb5bb7eo000fc2s6zc16xyad
 
-PUT http://localhost:3000/grades/{{putGrade}} 
+PUT {{url}}/grades/{{putGrade}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}
@@ -50,7 +54,7 @@ Authorization: {{testUserToken}}
 
 @deleteGrade = cmb5b7o29000bc2s6j5i4ycgw
 
-DELETE http://localhost:3000/grades/{{deleteGrade}} 
+DELETE {{url}}/grades/{{deleteGrade}} 
 Content-Type: application/json
 apikey: {{apiKey}}
 Authorization: {{testUserToken}}

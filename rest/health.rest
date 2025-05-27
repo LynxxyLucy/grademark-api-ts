@@ -3,12 +3,16 @@
 @supabaseApikey = {{$dotenv SUPABASE_APIKEY}}
 @apiKey = {{$dotenv APIKEY}}
 
+@url = http://localhost:3000
+
+@url = {{$dotenv DEV_PROD_URL}}
+
 ### Local Health Check
 
-GET http://localhost:3000/health
+GET {{url}}/health
 
 ### Teapot
-GET http://localhost:3000/
+GET {{url}}/
 
 ### PostgreSQL Instance Health Check
 
