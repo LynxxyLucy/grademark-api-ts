@@ -1,5 +1,5 @@
 import repo from '@root/src/repositories/3.grade.repository';
-import { NotFoundError } from '@utils/custom.error';
+import { NotFoundError, ServerError } from '@utils/custom.error';
 
 class GradeService {
   async getAllForSubject(subjectId: string) {
@@ -13,6 +13,9 @@ class GradeService {
   async create(subjectId: string, grade: string, type: string, date: Date) {
     // Create a new grade
     const newGrade = await repo.create(subjectId, grade, type, date);
+    if (!newGrade) {
+      throw new ServerError('Failed to create grade.');
+    }
     return newGrade;
   }
 
@@ -20,7 +23,7 @@ class GradeService {
     // Check if the grade exists
     const existingGrade = await repo.getById(id);
     if (!existingGrade) {
-      throw new NotFoundError('Grade not found.');
+      throw new NotFoundError(`Grade with id ${id} not found.`);
     }
 
     // Update the grade
