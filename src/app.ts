@@ -19,12 +19,17 @@ app.use(express.json());
 // Health Router
 const health = express.Router();
 health.get('/', (req: Request, res: Response) => {
-  res.status(200).send('Healthy');
+  res.status(200).json('Healthy');
 });
 
 // App Route Definitions
 app.use('/', (req: Request, res: Response) => {
-  res.status(418).json('Hi :3');
+  res.status(200).json('Hi :3');
+  console.log("Works ^-^"); // Just for fun, as per the HTTP 418 status code
+});
+app.use('/teapot', (req: Request, res: Response) => {
+
+  res.status(418).json('I\'m a teapot!'); // HTTP 418: I'm a teapot
   console.log("I'm a teapot!"); // Just for fun, as per the HTTP 418 status code
 });
 app.use('/health', health);
