@@ -8,6 +8,7 @@ vi.mock('../../../prisma.client', () => {
     default: {
       grade: {
         findMany: vi.fn().mockResolvedValue([]),
+        findUnique: vi.fn(),
         create: vi.fn().mockResolvedValue({}),
         update: vi.fn().mockResolvedValue({}),
         delete: vi.fn().mockResolvedValue({}),
@@ -50,6 +51,32 @@ describe('GradeRepository', () => {
         where: { subjectId: 'nonexistentSubject' },
       });
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('getById', () => {
+    it('should return a grade by its ID', async () => {
+      const mockGrade = { id: '1', subjectId: 'subject1', grade: 'A', type: 'exam', date: '2023-01-01' };
+      
+      vi.mocked(prisma.grade.findUnique).mockResolvedValue(mockGrade);
+
+      const result = await gradeRepository.getById('1');
+
+      expect(prisma.grade.findUnique).toHaveBeenCalledWith({
+        where: { id: '1' },
+      });
+      expect(result).toEqual(mockGrade);
+    });
+
+    it('should return null if the grade does not exist', async () => {
+      vi.mocked(prisma.grade.findUnique).mockResolvedValue(null);
+
+      const result = await gradeRepository.getById('nonexistent');
+
+      expect(prisma.grade.findUnique).toHaveBeenCalledWith({
+        where: { id: 'nonexistent' },
+      });
+      expect(result).toBeNull();
     });
   });
 

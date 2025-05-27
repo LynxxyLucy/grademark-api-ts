@@ -9,6 +9,7 @@ vi.mock('../../../prisma.client', () => ({
         subject: {
             findMany: vi.fn(),
             findUnique: vi.fn(),
+            findFirst: vi.fn(),
             create: vi.fn(),
             update: vi.fn(),
             delete: vi.fn(),
@@ -81,6 +82,31 @@ describe('SubjectRepository', () => {
             expect(result).toBeNull();
         });
     });
+
+    describe('getUniqueByName', () => {
+        it('should return a subject by name and semesterId', async () => {
+            vi.mocked(prisma.subject.findFirst).mockResolvedValue(mockSubject);
+
+            const result = await subjectRepository.getUniqueByName('Mathematics', 'semester-id-1');
+
+            expect(prisma.subject.findFirst).toHaveBeenCalledWith({
+                where: { name: 'Mathematics', semesterId: 'semester-id-1' },
+            });
+            expect(result).toEqual(mockSubject);
+        });
+
+        it('should return null when subject is not found', async () => {
+            vi.mocked(prisma.subject.findFirst).mockResolvedValue(null);
+
+            const result = await subjectRepository.getUniqueByName('Non-existent Subject', 'semester-id-1');
+
+            expect(prisma.subject.findFirst).toHaveBeenCalledWith({
+                where: { name: 'Non-existent Subject', semesterId: 'semester-id-1' },
+            });
+            expect(result).toBeNull();
+        });
+    }
+    );
 
     describe('getUniqueWithGrades', () => {
         it('should return subject with grades', async () => {
