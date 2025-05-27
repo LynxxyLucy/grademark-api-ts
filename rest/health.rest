@@ -6,10 +6,9 @@
 ### Local Health Check
 
 GET http://localhost:3000/health
-apikey: {{apiKey}}
 
 ### Teapot
-GET http://localhost:3000/teapot
+GET http://localhost:3000/
 
 ### PostgreSQL Instance Health Check
 

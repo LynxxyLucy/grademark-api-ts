@@ -11,7 +11,7 @@ export const routeNotFoundHandler = (req: Request, res: Response, next: NextFunc
     res.status(204).send(); // No content for favicon
     return;
   }
-  
+
   const error = new TeapotError(`Hi :3 Ur silly, this doesnt exist: ${req.originalUrl}`);
   next(error);
 };
