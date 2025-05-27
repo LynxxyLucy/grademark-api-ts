@@ -24,7 +24,7 @@ health.get('/', (req: Request, res: Response) => {
 
 // App Route Definitions
 app.use('/', (req: Request, res: Response) => {
-  res.status(418).send('Hi :3');
+  res.status(418).json('Hi :3');
   console.log("I'm a teapot!"); // Just for fun, as per the HTTP 418 status code
 });
 app.use('/health', health);
