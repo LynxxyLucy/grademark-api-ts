@@ -23,7 +23,9 @@ health.get('/', (req: Request, res: Response) => {
 });
 
 // App Route Definitions
-app.use('/', health);
+app.use('/', (req: Request, res: Response) => {
+  res.status(200).send('Hi :3');
+});
 app.use('/health', health);
 app.use('/auth', apikey, authRouter);
 app.use('/semesters', apikey, auth, semesterRouter);
