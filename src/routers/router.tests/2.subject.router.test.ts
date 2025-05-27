@@ -4,6 +4,7 @@ import express from 'express';
 import subjectRouter from '../../routers/2.subject.router';
 import subjectService from '../../services/2.subject.service';
 import { errorHandler } from '../../middleware/error.middleware';
+import { NotFoundError } from '../../utils/custom.error';
 
 // Mock the subject service
 vi.mock('../../services/2.subject.service');
@@ -58,12 +59,12 @@ describe('Subject Router', () => {
     });
 
     it('should return 404 if subject not found', async () => {
-      vi.mocked(subjectService.getUniqueByIdWithGrades).mockResolvedValue(null);
+      vi.mocked(subjectService.getUniqueByIdWithGrades).mockRejectedValue(new NotFoundError('Subject not found.'));
 
       const response = await request(app).get('/subjects/999');
 
       expect(response.status).toBe(404);
-      expect(response.body).toEqual({ message: 'Subject not found.' });
+      expect(response.body).toEqual({ error: "NotFoundError", message: 'Subject not found.' });
     });
 
     it('should handle errors when getting a subject', async () => {
