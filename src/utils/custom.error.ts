@@ -10,6 +10,15 @@ export class CustomError extends Error {
   }
 }
 
+export class TeapotError extends CustomError {
+  constructor(message: string) {
+    super(message);
+    this.name = 'TeapotError';
+    this.statusCode = 418; // I'm a teapot
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
 // MARK: - Subclasses
 export class ConflictError extends CustomError {
   constructor(message: string) {

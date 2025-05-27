@@ -8,6 +8,9 @@
 GET http://localhost:3000/health
 apikey: {{apiKey}}
 
+### Teapot
+GET http://localhost:3000/teapot
+
 ### PostgreSQL Instance Health Check
 
 GET https://fqxigjztdwogydtgfvvs.supabase.co/health 
