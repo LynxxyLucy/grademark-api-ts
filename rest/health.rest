@@ -12,6 +12,7 @@
 GET {{url}}/health
 
 ### Teapot
+
 GET {{url}}/
 
 ### PostgreSQL Instance Health Check
