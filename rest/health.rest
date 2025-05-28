@@ -7,11 +7,11 @@
 
 @url = {{$dotenv DEV_PROD_URL}}
 
-### Local Health Check
+### Api Health Check
 
 GET {{url}}/health
 
-### Teapot
+### Root
 
 GET {{url}}/
 
