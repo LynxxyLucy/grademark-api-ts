@@ -1,5 +1,4 @@
 import express from 'express';
-// import repo from '@root/src/repositories/2.subject.repository';
 import service from '@services/2.subject.service';
 
 const router = express.Router();

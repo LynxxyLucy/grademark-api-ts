@@ -1,5 +1,5 @@
 import { ConflictError, NotFoundError, ServerError } from '../utils/custom.error';
-import repo from '../repositories/1.semester.repository';
+import repo from '@repositories/1.semester.repository';
 
 class SemesterService {
   async getAllForUser(userId: string, search?: string) {

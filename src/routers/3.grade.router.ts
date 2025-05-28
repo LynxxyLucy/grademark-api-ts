@@ -1,6 +1,4 @@
 import express from 'express';
-// import repo from '@root/src/repositories/3.grade.repository';
-// import { NotFoundError } from '../utils/custom.error';
 import service from '@services/3.grade.service';
 
 const router = express.Router();

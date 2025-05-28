@@ -1,4 +1,4 @@
-import repo from '@root/src/repositories/2.subject.repository';
+import repo from '@repositories/2.subject.repository';
 import { ConflictError, NotFoundError, ServerError } from '../utils/custom.error';
 
 class SubjectService {

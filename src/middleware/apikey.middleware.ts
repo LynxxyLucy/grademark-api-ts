@@ -1,15 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { UnauthorizedError } from '../utils/custom.error';
 
-
-/* const APIKEY = process.env.APIKEY;
-const NODE_ENV = process.env.NODE_ENV; */
-
 const apiKeyMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (process.env.NODE_ENV === 'test') {
     return next();
   }
   
+  // Check if API key is set in environment variables
   if (!process.env.APIKEY && process.env.NODE_ENV !== 'test') {
     console.warn('Warning: APIKEY is not set in environment variables');
     return next();

@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import repo from '@root/src/repositories/0.auth.repository';
+import repo from '@repositories/0.auth.repository';
 import { ConflictError, InvalidError, NotFoundError } from '@utils/custom.error';
 import { User } from '@generated/prisma';
 import { userSchema } from '../utils/joi.schemas';

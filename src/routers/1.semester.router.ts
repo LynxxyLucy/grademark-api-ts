@@ -1,5 +1,5 @@
 import express from 'express';
-import service from '@root/src/services/1.semester.service';
+import service from '@services/1.semester.service';
 
 const router = express.Router();
 
