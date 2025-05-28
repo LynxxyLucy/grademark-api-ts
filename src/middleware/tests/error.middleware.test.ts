@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Request, Response, NextFunction } from 'express';
 import { routeNotFoundHandler, errorHandler } from '../error.middleware';
-import { CustomError, NotFoundError } from '../../utils/custom.error';
+import { CustomError, TeapotError } from '../../utils/custom.error';
 
 describe('Error Middleware', () => {
     let mockRequest: Partial<Request>;
@@ -26,8 +26,8 @@ describe('Error Middleware', () => {
             
             expect(nextFunction).toHaveBeenCalledTimes(1);
             const error = nextFunction.mock.calls[0][0];
-            expect(error).toBeInstanceOf(NotFoundError);
-            expect(error.message).toBe('Route not found: /test-url');
+            expect(error).toBeInstanceOf(TeapotError);
+            expect(error.message).toBe('Hi :3 Ur silly, this doesnt exist: /test-url');
         });
     });
 

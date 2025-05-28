@@ -7,7 +7,7 @@ describe('App', () => {
         it('should return 200 and "Healthy" text for GET /health', async () => {
             const response = await request(app).get('/health');
             expect(response.status).toBe(200);
-            expect(response.text).toBe('Healthy');
+            expect(response.body).toBe('Healthy');
         });
     });
 
@@ -29,7 +29,7 @@ describe('App', () => {
     describe('Not found handling', () => {
         it('should return 404 for non-existent routes', async () => {
             const response = await request(app).get('/non-existent-route');
-            expect(response.status).toBe(404);
+            expect(response.status).toBe(418);
         });
     });
 });
